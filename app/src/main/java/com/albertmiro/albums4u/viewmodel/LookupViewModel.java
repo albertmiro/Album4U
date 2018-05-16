@@ -1,0 +1,138 @@
+package com.albertmiro.albums4u.viewmodel;
+
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
+import android.support.v4.app.FragmentActivity;
+
+import com.albertmiro.albums4u.AlbumsApp;
+import com.albertmiro.albums4u.repository.LookupRepository;
+import com.albertmiro.albums4u.viewmodel.data.Album;
+import com.albertmiro.albums4u.viewmodel.data.ArtistAndAlbums;
+
+import java.net.UnknownHostException;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
+public class LookupViewModel extends ViewModel {
+
+    private static LookupViewModel INSTANCE = null;
+
+    private static LookupRepository lookupRepository = AlbumsApp.getLookupRepository();
+
+    public static LookupViewModel getInstance(FragmentActivity activity) {
+        if (INSTANCE == null) {
+            INSTANCE = ViewModelProviders.of(activity).get(LookupViewModel.class);
+        }
+        return INSTANCE;
+    }
+
+    private MutableLiveData<Boolean> isDataLoading = new MutableLiveData<>();
+    private MutableLiveData<ArtistAndAlbums> artistAndAlbums = new MutableLiveData<>();
+    private MutableLiveData<Album> currentAlbum = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isNetworkError = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isUnknownError = new MutableLiveData<>();
+
+    public LiveData<Boolean> isDataLoading() {
+        return isDataLoading;
+    }
+
+    public LiveData<ArtistAndAlbums> getArtistAndAlbums() {
+        return artistAndAlbums;
+    }
+
+    public LiveData<Album> getAlbum() {
+        return currentAlbum;
+    }
+
+    public LiveData<Boolean> isNetworkError() {
+        return isNetworkError;
+    }
+
+    public LiveData<Boolean> isUnknownError() {
+        return isUnknownError;
+    }
+
+    public void loadAlbumsForArtist() {
+        isDataLoading.postValue(true);
+
+        lookupRepository.getJackJohnsonAlbums()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ArtistAndAlbums>() {
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(ArtistAndAlbums albumsAndArtist) {
+                        artistAndAlbums.postValue(albumsAndArtist);
+                        isDataLoading.postValue(false);
+                        isNetworkError.postValue(false);
+                        isUnknownError.postValue(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                        isDataLoading.postValue(false);
+                        if (t instanceof UnknownHostException) {
+                            isNetworkError.postValue(true);
+                        } else {
+                            isUnknownError.postValue(true);
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+
+                });
+    }
+
+    public void loadAlbumSongs(final int albumId) {
+        isDataLoading.postValue(true);
+        currentAlbum.postValue(null);
+
+        lookupRepository.getAlbumSongs(albumId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ArtistAndAlbums>() {
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(ArtistAndAlbums albumsAndArtist) {
+                        Album album = albumsAndArtist.getAlbum(albumId);
+                        isDataLoading.postValue(false);
+                        currentAlbum.postValue(album);
+                        isNetworkError.postValue(false);
+                        isUnknownError.postValue(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        t.printStackTrace();
+                        isDataLoading.postValue(false);
+                        if (t instanceof UnknownHostException) {
+                            isNetworkError.postValue(true);
+                        } else {
+                            isUnknownError.postValue(true);
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+
+                });
+    }
+
+}

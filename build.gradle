@@ -1,0 +1,43 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    ext {
+        gradle_version = '3.0.0'
+        support_library_version = '27.1.0'
+        constraint_layout_version = '1.1.0'
+        junit_version = '4.12'
+        test_runner_version = '1.0.1'
+        espresso_version = '3.0.1'
+        retrofit_version = '2.4.0'
+        rx_android_version = '2.0.2'
+        anko_version = '0.10.4'
+        android_arch_components_version = '1.1.1'
+        smoothprogressbar_circular_version = '1.3.0'
+        picasso_version = '2.71828'
+        mockito_kotlin_version = '1.1.0'
+    }
+
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

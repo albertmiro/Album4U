@@ -1,0 +1,41 @@
+package com.albertmiro.albums4u.ui.albums.adapter;
+
+import android.support.annotation.NonNull;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.albertmiro.albums4u.ui.albums.AlbumsListFragment;
+import com.albertmiro.albums4u.ui.common.adapter.RecyclerViewAdapterBase;
+import com.albertmiro.albums4u.ui.common.adapter.ViewWrapper;
+import com.albertmiro.albums4u.viewmodel.data.Album;
+
+public class AlbumsAdapter extends RecyclerViewAdapterBase<Album, AlbumsItemView> {
+
+    private AlbumsListFragment listener;
+
+    @Override
+    protected AlbumsItemView onCreateItemView(ViewGroup parent, int viewType) {
+        return new AlbumsItemView(parent.getContext());
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewWrapper<AlbumsItemView> holder, int position) {
+        final Album album = items.get(position);
+
+        if (holder.getView() != null) {
+            holder.getView().bind(album);
+            holder.getView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onAlbumClicked(album.getId());
+                    }
+                }
+            });
+        }
+    }
+
+    public void setListener(AlbumsListFragment listener) {
+        this.listener = listener;
+    }
+}

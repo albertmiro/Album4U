@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin10">10dp</dimen>
+    <dimen name="margin20">20dp</dimen>
+    <dimen name="margin5">5dp</dimen>
+    <dimen name="progressbarSize">35dp</dimen>
+    <dimen name="albumHeight">200dp</dimen>
+    <dimen name="albumDetailHeight">120dp</dimen>
+</resources>

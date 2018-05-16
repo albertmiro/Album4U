@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Albums4U</string>
+    <string name="unexpected_error">Ups! Something went wrong</string>
+    <string name="lost_connection">Network connection lost</string>
+    <string name="no_albums">No Albums found</string>
+    <string name="tracks">Tracks: %d</string>
+    <string name="no_songs">No songs</string>
+    <string name="songs">Songs</string>
+    <string name="duration">Duration</string>
+    <string name="no_data">No data</string>
+</resources>
