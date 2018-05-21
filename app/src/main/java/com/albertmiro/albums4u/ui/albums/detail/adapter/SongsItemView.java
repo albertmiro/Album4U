@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,17 +28,14 @@ public class SongsItemView extends RelativeLayout {
         trackName.setText(track.getTrackName());
         trackTime.setText(AppUtils.convertMillisToString(track.getTrackTimeMillis()));
 
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Uri myUri = Uri.parse(track.getPreviewUrl());
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(myUri, "audio/m4a");
-                    getContext().startActivity(intent);
-                } catch (ActivityNotFoundException e) {
-                    Log.d("Songs", "No activity found to play music");
-                }
+        setOnClickListener(v -> {
+            try {
+                Uri myUri = Uri.parse(track.getPreviewUrl());
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(myUri, "audio/m4a");
+                getContext().startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Log.d("Songs", "No activity found to play music");
             }
         });
 

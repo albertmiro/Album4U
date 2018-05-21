@@ -27,6 +27,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -57,7 +61,20 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    testImplementation "junit:junit:$junit_version"
     androidTestImplementation "com.android.support.test:runner:$test_runner_version"
+
+
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+
+
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "org.mockito:mockito-all:1.10.19"
+    testImplementation "org.hamcrest:hamcrest-all:1.3"
 }
 

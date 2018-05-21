@@ -1,7 +1,6 @@
 package com.albertmiro.albums4u.ui.albums.adapter;
 
 import android.support.annotation.NonNull;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.albertmiro.albums4u.ui.albums.AlbumsListFragment;
@@ -24,12 +23,9 @@ public class AlbumsAdapter extends RecyclerViewAdapterBase<Album, AlbumsItemView
 
         if (holder.getView() != null) {
             holder.getView().bind(album);
-            holder.getView().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onAlbumClicked(album.getId());
-                    }
+            holder.getView().setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onAlbumClicked(album.getId());
                 }
             });
         }

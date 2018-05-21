@@ -4,15 +4,24 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 
 import com.albertmiro.albums4u.R;
 import com.albertmiro.albums4u.ui.common.BaseActivity;
 
-public class MainActivity extends BaseActivity {
+import javax.inject.Inject;
+
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+
+public class MainActivity extends BaseActivity implements HasSupportFragmentInjector {
 
     private Toolbar toolbar;
     private ConstraintLayout mainRootView;
+
+    @Inject
+    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,5 +50,11 @@ public class MainActivity extends BaseActivity {
 
     public void onAlbumClicked(int albumId) {
         Navigation.loadAlbumDetail(this, albumId);
+    }
+
+
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return dispatchingAndroidInjector;
     }
 }

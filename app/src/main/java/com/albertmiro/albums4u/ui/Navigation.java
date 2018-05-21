@@ -3,7 +3,7 @@ package com.albertmiro.albums4u.ui;
 import android.support.v4.app.FragmentActivity;
 
 import com.albertmiro.albums4u.R;
-import com.albertmiro.albums4u.ui.albums.detail.AlbumDetail;
+import com.albertmiro.albums4u.ui.albums.detail.AlbumDetailFragment;
 import com.albertmiro.albums4u.ui.albums.AlbumsListFragment;
 
 class Navigation {
@@ -15,7 +15,7 @@ class Navigation {
     }
 
     public static void loadAlbumDetail(FragmentActivity activity, int albumId) {
-        AlbumDetail albumDetail = new AlbumDetail();
+        AlbumDetailFragment albumDetail = new AlbumDetailFragment();
         albumDetail.setAlbumId(albumId);
 
         activity.getSupportFragmentManager().beginTransaction()

@@ -3,15 +3,15 @@ package com.albertmiro.albums4u.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProviders;
-import android.support.v4.app.FragmentActivity;
+import android.support.annotation.NonNull;
 
-import com.albertmiro.albums4u.AlbumsApp;
 import com.albertmiro.albums4u.repository.LookupRepository;
 import com.albertmiro.albums4u.viewmodel.data.Album;
 import com.albertmiro.albums4u.viewmodel.data.ArtistAndAlbums;
 
 import java.net.UnknownHostException;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -20,22 +20,26 @@ import io.reactivex.schedulers.Schedulers;
 
 public class LookupViewModel extends ViewModel {
 
-    private static LookupViewModel INSTANCE = null;
+    private LookupRepository lookupRepository;
 
-    private static LookupRepository lookupRepository = AlbumsApp.getLookupRepository();
+    private MutableLiveData<Boolean> isDataLoading;
+    private MutableLiveData<ArtistAndAlbums> artistAndAlbums;
+    private MutableLiveData<Album> currentAlbum;
+    private MutableLiveData<Boolean> isNetworkError;
+    private MutableLiveData<Boolean> isUnknownError;
 
-    public static LookupViewModel getInstance(FragmentActivity activity) {
-        if (INSTANCE == null) {
-            INSTANCE = ViewModelProviders.of(activity).get(LookupViewModel.class);
-        }
-        return INSTANCE;
+    @Inject
+    LookupViewModel(@NonNull LookupRepository lookupRepository) {
+
+        this.lookupRepository = lookupRepository;
+
+        this.isDataLoading = new MutableLiveData<>();
+        this.artistAndAlbums = new MutableLiveData<>();
+        this.currentAlbum = new MutableLiveData<>();
+        this.isNetworkError = new MutableLiveData<>();
+        this.isUnknownError = new MutableLiveData<>();
+
     }
-
-    private MutableLiveData<Boolean> isDataLoading = new MutableLiveData<>();
-    private MutableLiveData<ArtistAndAlbums> artistAndAlbums = new MutableLiveData<>();
-    private MutableLiveData<Album> currentAlbum = new MutableLiveData<>();
-    private MutableLiveData<Boolean> isNetworkError = new MutableLiveData<>();
-    private MutableLiveData<Boolean> isUnknownError = new MutableLiveData<>();
 
     public LiveData<Boolean> isDataLoading() {
         return isDataLoading;

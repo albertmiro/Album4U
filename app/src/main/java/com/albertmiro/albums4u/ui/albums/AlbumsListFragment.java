@@ -1,6 +1,6 @@
 package com.albertmiro.albums4u.ui.albums;
 
-import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,16 +15,21 @@ import android.widget.RelativeLayout;
 import com.albertmiro.albums4u.R;
 import com.albertmiro.albums4u.ui.albums.adapter.AlbumsAdapter;
 import com.albertmiro.albums4u.ui.common.BaseFragment;
+import com.albertmiro.albums4u.viewmodel.AppViewModelFactory;
 import com.albertmiro.albums4u.viewmodel.LookupViewModel;
 import com.albertmiro.albums4u.viewmodel.data.Album;
-import com.albertmiro.albums4u.viewmodel.data.ArtistAndAlbums;
 
 import java.util.Collections;
 import java.util.List;
 
-public class AlbumsListFragment extends BaseFragment implements AlbumListListener {
+import javax.inject.Inject;
+
+public class AlbumsListFragment extends BaseFragment implements AlbumListListener, AlbumsListContract {
 
     private static final int GRID_SPAN_COUNT = 2;
+
+    @Inject
+    AppViewModelFactory viewModelFactory;
 
     private LookupViewModel albumsViewModel;
 
@@ -33,17 +38,13 @@ public class AlbumsListFragment extends BaseFragment implements AlbumListListene
     private SwipeRefreshLayout swipeToRefresh;
     private RelativeLayout progressBarContainer;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_albums_list, container, false);
-    }
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        albumsViewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(LookupViewModel.class);
 
-        albumsViewModel = LookupViewModel.getInstance(getActivity());
 
         initViews();
 
@@ -54,6 +55,12 @@ public class AlbumsListFragment extends BaseFragment implements AlbumListListene
         initObservers();
 
         albumsViewModel.loadAlbumsForArtist();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_albums_list, container, false);
     }
 
     private void initViews() {
@@ -75,76 +82,80 @@ public class AlbumsListFragment extends BaseFragment implements AlbumListListene
     }
 
     private void initSwipeRefresh() {
-        swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                albumsViewModel.loadAlbumsForArtist();
-            }
-        });
+        swipeToRefresh.setOnRefreshListener(() -> albumsViewModel.loadAlbumsForArtist());
     }
 
     private void initObservers() {
         albumsViewModel.isDataLoading()
-                .observe(this, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(@Nullable Boolean hasChanged) {
-                        if (hasChanged != null) {
-                            if (!swipeToRefresh.isRefreshing()) {
-                                if (hasChanged) {
-                                    progressBarContainer.setVisibility(View.VISIBLE);
-                                } else {
-                                    progressBarContainer.setVisibility(View.GONE);
-                                }
-                            }
+                .observe(this, hasChanged -> {
+                    if (hasChanged != null) {
+                        if (!swipeToRefresh.isRefreshing()) {
+                            showOrHideProgressBar(hasChanged);
                         }
                     }
                 });
 
-        albumsViewModel.getArtistAndAlbums().observe(this, new Observer<ArtistAndAlbums>() {
-            @Override
-            public void onChanged(@Nullable ArtistAndAlbums artistAndAlbums) {
-                showAlbums(artistAndAlbums != null ? artistAndAlbums.getAlbumList() : Collections.<Album>emptyList());
+        albumsViewModel.getArtistAndAlbums().observe(this, artistAndAlbums ->
+                showAlbums(artistAndAlbums != null ? artistAndAlbums.getAlbumList() : Collections.<Album>emptyList()));
+
+        albumsViewModel.isNetworkError().observe(this, hasChanged -> {
+            if (hasChanged != null && hasChanged) {
+                showNetworkError();
             }
         });
 
-        albumsViewModel.isNetworkError().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean hasChanged) {
-                if (hasChanged != null && hasChanged) {
-                    mainActivity.showMessage(getString(R.string.lost_connection));
-                    hideRefreshingIcon();
-                }
-            }
-        });
-
-        albumsViewModel.isUnknownError().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean hasChanged) {
-                if (hasChanged != null && hasChanged) {
-                    mainActivity.showMessage(getString(R.string.unexpected_error));
-                    hideRefreshingIcon();
-                }
+        albumsViewModel.isUnknownError().observe(this, hasChanged -> {
+            if (hasChanged != null && hasChanged) {
+                showUnknownError();
             }
         });
     }
 
-    private void showAlbums(List<Album> albums) {
+    @Override
+    public void showOrHideProgressBar(boolean showProgress) {
+        if (showProgress) {
+            progressBarContainer.setVisibility(View.VISIBLE);
+        } else {
+            progressBarContainer.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void showUnknownError() {
+        showMessage(getString(R.string.unexpected_error));
+        hideRefreshingIcon();
+    }
+
+    @Override
+    public void showNetworkError() {
+        showMessage(getString(R.string.lost_connection));
+        hideRefreshingIcon();
+    }
+
+    @Override
+    public void showAlbums(List<Album> albums) {
         if (swipeToRefresh.isRefreshing()) {
             albumsAdapter.clearItems();
             swipeToRefresh.setRefreshing(false);
         }
 
         if (albums.isEmpty()) {
-            mainActivity.showMessage(getString(R.string.no_albums));
+            showMessage(getString(R.string.no_albums));
         } else {
             albumsAdapter.setItems(albums);
         }
     }
 
-    private void hideRefreshingIcon() {
+    @Override
+    public void hideRefreshingIcon() {
         if (swipeToRefresh.isRefreshing()) {
             swipeToRefresh.setRefreshing(false);
         }
+    }
+
+    @Override
+    public void showMessage(String message) {
+        mainActivity.showMessage(message);
     }
 
     @Override

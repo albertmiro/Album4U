@@ -1,24 +1,29 @@
 package com.albertmiro.albums4u;
 
+import android.app.Activity;
 import android.app.Application;
 
-import com.albertmiro.albums4u.repository.LookupRepository;
-import com.albertmiro.albums4u.webservice.RestAPI;
+import com.albertmiro.albums4u.di.AppInjector;
 
-public class AlbumsApp extends Application {
+import javax.inject.Inject;
 
-    private static LookupRepository lookupRepository;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
+
+public class AlbumsApp extends Application implements HasActivityInjector {
+
+    @Inject
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        RestAPI api = new RestAPI();
-        api.init();
-        lookupRepository = new LookupRepository(api);
+        AppInjector.init(this);
     }
 
-    public static LookupRepository getLookupRepository() {
-        return lookupRepository;
+    @Override
+    public DispatchingAndroidInjector<Activity> activityInjector() {
+        return dispatchingAndroidInjector;
     }
 
 }

@@ -1,20 +1,24 @@
 package com.albertmiro.albums4u.repository;
 
-import com.albertmiro.albums4u.repository.model.GenericITunesResponse;
-import com.albertmiro.albums4u.repository.model.GenericITunesResponseMapper;
+import com.albertmiro.albums4u.api.model.GenericITunesResponseMapper;
 import com.albertmiro.albums4u.utils.AppUtils;
 import com.albertmiro.albums4u.viewmodel.data.ArtistAndAlbums;
-import com.albertmiro.albums4u.webservice.RestAPI;
+import com.albertmiro.albums4u.api.ITunesService;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Function;
 
+@Singleton
 public class LookupRepository {
 
-    private final RestAPI api;
+    private ITunesService iTunesService;
 
-    public LookupRepository(RestAPI api) {
-        this.api = api;
+    @Inject
+    LookupRepository(ITunesService iTunesService)
+    {
+        this.iTunesService = iTunesService;
     }
 
     private LookupCache artistAndAlbumsCache = new LookupCache();
@@ -25,14 +29,11 @@ public class LookupRepository {
             return Observable.just(artistAndAlbumsCache.getArtistAndAlbums());
         }
 
-        return api.getAlbumsByArtist(AppUtils.JACK_JOHNSON_ID)
-                .map(new Function<GenericITunesResponse, ArtistAndAlbums>() {
-                    @Override
-                    public ArtistAndAlbums apply(GenericITunesResponse genericAlbumAndArtistResponse) {
-                        ArtistAndAlbums artistAndAlbums = new GenericITunesResponseMapper().toAlbumsAndArtist(genericAlbumAndArtistResponse);
-                        artistAndAlbumsCache.setArtistAndAlbums(artistAndAlbums);
-                        return artistAndAlbums;
-                    }
+        return iTunesService.getAlbumsByArtist(AppUtils.JACK_JOHNSON_ID, AppUtils.ALBUM_ENTITY)
+                .map(genericAlbumAndArtistResponse -> {
+                    ArtistAndAlbums artistAndAlbums = new GenericITunesResponseMapper().toAlbumsAndArtist(genericAlbumAndArtistResponse);
+                    artistAndAlbumsCache.setArtistAndAlbums(artistAndAlbums);
+                    return artistAndAlbums;
                 });
     }
 
@@ -43,14 +44,11 @@ public class LookupRepository {
             return Observable.just(artistAndAlbumsCache.getArtistAndAlbums());
         }
 
-        return api.getAlbumSongs(albumId)
-                .map(new Function<GenericITunesResponse, ArtistAndAlbums>() {
-                    @Override
-                    public ArtistAndAlbums apply(GenericITunesResponse genericAlbumAndArtistResponse) {
-                        ArtistAndAlbums artistAndAlbums = new GenericITunesResponseMapper().toAlbumsAndArtist(genericAlbumAndArtistResponse);
-                        artistAndAlbumsCache.updateAlbumWithTracks(albumId,artistAndAlbums.getAlbum(albumId).getTracks());
-                        return artistAndAlbums;
-                    }
+        return iTunesService.getAlbumSongs(albumId, AppUtils.SONG_ENTITY)
+                .map(genericAlbumAndArtistResponse -> {
+                    ArtistAndAlbums artistAndAlbums = new GenericITunesResponseMapper().toAlbumsAndArtist(genericAlbumAndArtistResponse);
+                    artistAndAlbumsCache.updateAlbumWithTracks(albumId,artistAndAlbums.getAlbum(albumId).getTracks());
+                    return artistAndAlbums;
                 });
     }
 
