@@ -3,57 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:layout_height="@dimen/albumHeight"
+    android:layout_margin="@dimen/margin3"
+    android:background="@color/whiteAlpha05"
+    tools:background="@color/colorPrimary">
 
     <ImageView
         android:id="@+id/albumImage"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/albumHeight"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/albumTitle"
-        android:layout_width="wrap_content"
+        style="@style/AlbumTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:lines="2"
-        android:maxLines="2"
-        android:textStyle="bold"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="left"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/albumImage"
         tools:text="Ice and Fire" />
 
     <TextView
         android:id="@+id/albumArtist"
-        android:layout_width="wrap_content"
+        style="@style/AlbumSubtitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:lines="1"
-        android:maxLines="1"
-        android:textStyle="italic"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="left"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/albumTitle"
         tools:text="John Snow" />
 
     <TextView
         android:id="@+id/albumTracks"
+        style="@style/AlbumTracks"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="left"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/albumArtist"
-        tools:text="Tracks: 14" />
+        tools:text="14 Songs" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65" />
 
 </android.support.constraint.ConstraintLayout>

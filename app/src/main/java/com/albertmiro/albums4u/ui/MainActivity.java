@@ -57,4 +57,5 @@ public class MainActivity extends BaseActivity implements HasSupportFragmentInje
     public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
         return dispatchingAndroidInjector;
     }
+
 }

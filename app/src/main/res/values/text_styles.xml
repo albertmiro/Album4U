@@ -1,0 +1,64 @@
+<resources>
+
+    <style name="OneLine">
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TextWhite">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextWhiteTransparent">
+        <item name="android:textColor">#B3FFFFFF</item>
+    </style>
+
+    <style name="TextWhite.Txt15" parent="TextWhite">
+        <item name="android:textSize">@dimen/txt15</item>
+    </style>
+
+    <style name="TextWhite.Txt15.Bold" parent="TextWhite.Txt15">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextWhite.Txt15.Bold.OneLine" parent="TextWhite.Txt15.Bold">
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TextWhite.Txt15.Bold.ThreeLines" parent="TextWhite.Txt15.Bold">
+        <item name="android:maxLines">3</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TextWhiteTransparent.Txt13" parent="TextWhiteTransparent">
+        <item name="android:textSize">@dimen/txt13</item>
+    </style>
+
+    <style name="TextWhiteTransparent.Txt13.Italic" parent="TextWhiteTransparent.Txt13">
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="TextWhiteTransparent.Txt13.Italic.OneLine" parent="TextWhiteTransparent.Txt13.Italic">
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="AlbumTitle" parent="TextWhite.Txt15.Bold.OneLine" />
+
+    <style name="AlbumTitle3Lines" parent="TextWhite.Txt15.Bold.ThreeLines" />
+
+    <style name="AlbumSubtitle" parent="TextWhiteTransparent.Txt13.Italic.OneLine"/>
+
+    <style name="AlbumTracks" parent="TextWhiteTransparent.Txt13" />
+
+    <style name="AlbumTrack" parent="TextWhite.Txt15.Bold.OneLine" />
+
+    <style name="AlbumTrackTime" parent="TextWhiteTransparent.Txt13.Italic.OneLine"/>
+
+    <style name="AlbumNoSongs" parent="TextWhiteTransparent.Txt13.Italic"/>
+
+</resources>

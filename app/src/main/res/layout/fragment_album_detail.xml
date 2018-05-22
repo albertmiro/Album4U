@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/radial_gradient_bg">
 
     <View
         android:layout_width="0dp"
         android:layout_height="@dimen/albumDetailHeight"
-        android:background="#cdcdcd"
+        android:background="@color/whiteAlpha10"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -16,6 +17,7 @@
         android:id="@+id/albumImage"
         android:layout_width="@dimen/albumDetailHeight"
         android:layout_height="@dimen/albumDetailHeight"
+        android:background="@color/colorPrimaryDark"
         android:scaleType="fitCenter"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,23 +25,25 @@
 
     <TextView
         android:id="@+id/albumTitle"
+        style="@style/AlbumTitle3Lines"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin5"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@+id/albumImage"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="@dimen/margin8"
+        android:layout_marginTop="@dimen/margin8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/albumImage"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Ice and Fire" />
 
     <TextView
         android:id="@+id/albumArtist"
+        style="@style/AlbumSubtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin5"
-        android:textStyle="italic"
-        app:layout_constraintLeft_toRightOf="@+id/albumImage"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="@dimen/margin8"
+        android:layout_marginTop="@dimen/margin4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/albumImage"
         app:layout_constraintTop_toBottomOf="@+id/albumTitle"
         tools:text="John Williams" />
 
@@ -50,18 +54,20 @@
         app:layout_constraintTop_toBottomOf="@+id/albumImage">
 
         <TextView
+            style="@style/AlbumTracks"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin5"
+            android:layout_margin="@dimen/margin4"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/songs"
             android:textStyle="bold" />
 
         <TextView
+            style="@style/AlbumTracks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin5"
+            android:layout_margin="@dimen/margin4"
             android:text="@string/duration"
             android:textStyle="bold" />
     </LinearLayout>
@@ -76,18 +82,17 @@
 
     <TextView
         android:id="@+id/noSongs"
+        style="@style/AlbumNoSongs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin5"
+        android:layout_margin="@dimen/margin4"
         android:gravity="center"
         android:text="@string/no_songs"
-        android:textStyle="italic"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/songsTime" />
-
 
     <include
         android:id="@+id/progressBar"

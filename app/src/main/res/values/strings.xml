@@ -3,7 +3,7 @@
     <string name="unexpected_error">Ups! Something went wrong</string>
     <string name="lost_connection">Network connection lost</string>
     <string name="no_albums">No Albums found</string>
-    <string name="tracks">Tracks: %d</string>
+    <string name="total_songs">%d Songs</string>
     <string name="no_songs">No songs</string>
     <string name="songs">Songs</string>
     <string name="duration">Duration</string>

@@ -3,35 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin10"
-    android:background="@android:color/white">
+    android:layout_margin="@dimen/margin4"
+    android:background="@drawable/rounded_rect"
+    android:padding="@dimen/margin4">
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin5"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_play_circle"/>
+        android:padding="@dimen/margin4"
+        android:src="@drawable/ic_play_circle" />
 
     <TextView
         android:id="@+id/trackName"
+        style="@style/AlbumTrack"
         android:layout_width="0dp"
-        android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_weight="1"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textStyle="bold"
         tools:text="Ice and Fire" />
 
     <TextView
         android:id="@+id/trackTime"
+        style="@style/AlbumTrackTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textStyle="italic"
+        android:layout_marginEnd="@dimen/margin4"
+        android:layout_marginStart="@dimen/margin10"
         tools:text="2:35" />
 
 </LinearLayout>

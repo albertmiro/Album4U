@@ -26,7 +26,7 @@ public class AlbumsItemView extends RelativeLayout {
 
         albumTitle.setText(album.getName());
         albumArtist.setText(album.getArtistName());
-        albumTracks.setText(String.format(getContext().getString(R.string.tracks), album.getTrackCount()));
+        albumTracks.setText(String.format(getContext().getString(R.string.total_songs), album.getTrackCount()));
 
         Picasso.get()
                 .load(album.getThumbnailUrl())
