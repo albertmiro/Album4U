@@ -40,7 +40,7 @@ public class Album extends CommonLookupData {
     }
 
     public String getThumbnailUrl() {
-        return thumbnailUrl;
+        return thumbnailUrl.replace("100x100","250x250");
     }
 
     public void setThumbnailUrl(String thumbnailUrl) {
