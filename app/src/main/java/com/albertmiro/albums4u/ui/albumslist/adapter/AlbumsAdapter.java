@@ -1,12 +1,12 @@
-package com.albertmiro.albums4u.ui.albums.adapter;
+package com.albertmiro.albums4u.ui.albumslist.adapter;
 
 import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
-import com.albertmiro.albums4u.ui.albums.AlbumsListFragment;
+import com.albertmiro.albums4u.ui.albumslist.AlbumsListFragment;
 import com.albertmiro.albums4u.ui.common.adapter.RecyclerViewAdapterBase;
 import com.albertmiro.albums4u.ui.common.adapter.ViewWrapper;
-import com.albertmiro.albums4u.viewmodel.data.Album;
+import com.albertmiro.albums4u.domain.Album;
 
 public class AlbumsAdapter extends RecyclerViewAdapterBase<Album, AlbumsItemView> {
 

@@ -5,7 +5,7 @@ import com.albertmiro.albums4u.ui.MainActivity;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
-@Module
+@Module(includes = ViewModelModule.class)
 abstract class MainActivityModule {
 
     @ContributesAndroidInjector(modules = FragmentBuildersModule.class)

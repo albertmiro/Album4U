@@ -1,11 +1,11 @@
-package com.albertmiro.albums4u.ui.albums.detail.adapter;
+package com.albertmiro.albums4u.ui.albumdetail.adapter;
 
 import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import com.albertmiro.albums4u.ui.common.adapter.RecyclerViewAdapterBase;
 import com.albertmiro.albums4u.ui.common.adapter.ViewWrapper;
-import com.albertmiro.albums4u.viewmodel.data.Track;
+import com.albertmiro.albums4u.domain.Track;
 
 public class SongsAdapter extends RecyclerViewAdapterBase<Track, SongsItemView> {
 

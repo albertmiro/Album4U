@@ -1,6 +1,6 @@
-package com.albertmiro.albums4u.ui.albums;
+package com.albertmiro.albums4u.ui.albumslist;
 
-import com.albertmiro.albums4u.viewmodel.data.Album;
+import com.albertmiro.albums4u.domain.Album;
 
 import java.util.List;
 

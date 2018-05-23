@@ -10,27 +10,7 @@ public class AppUtils {
     public static final String SONG_ENTITY = "song";
     public static final String ALBUM_ENTITY = "album";
 
-    public static String WRAPPER_TRACK = "track";
-    public static String WRAPPER_COLLECTION = "collection";
-    public static String WRAPPER_ARTIST = "artist";
-
     public static int JACK_JOHNSON_ID = 909253;
-
-    public enum WRAPPER_TYPES {
-        TRACK, COLLECTION, ARTIST, NO_DEFINED
-    }
-
-    public static WRAPPER_TYPES getWrapperType(String wrapperType) {
-        if (wrapperType.equals(AppUtils.WRAPPER_ARTIST)) {
-            return WRAPPER_TYPES.ARTIST;
-        } else if (wrapperType.equals(AppUtils.WRAPPER_COLLECTION)) {
-            return WRAPPER_TYPES.COLLECTION;
-        } else if (wrapperType.equals(AppUtils.WRAPPER_TRACK)) {
-            return WRAPPER_TYPES.TRACK;
-        } else {
-            return WRAPPER_TYPES.NO_DEFINED;
-        }
-    }
 
     public static <C> ArrayList<C> toList(SparseArray<C> sparseArray) {
         if (sparseArray == null) return null;

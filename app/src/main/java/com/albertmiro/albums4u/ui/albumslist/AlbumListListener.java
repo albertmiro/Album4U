@@ -1,4 +1,4 @@
-package com.albertmiro.albums4u.ui.albums;
+package com.albertmiro.albums4u.ui.albumslist;
 
 public interface AlbumListListener {
 

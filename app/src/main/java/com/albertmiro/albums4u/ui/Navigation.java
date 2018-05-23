@@ -3,8 +3,8 @@ package com.albertmiro.albums4u.ui;
 import android.support.v4.app.FragmentActivity;
 
 import com.albertmiro.albums4u.R;
-import com.albertmiro.albums4u.ui.albums.detail.AlbumDetailFragment;
-import com.albertmiro.albums4u.ui.albums.AlbumsListFragment;
+import com.albertmiro.albums4u.ui.albumdetail.AlbumDetailFragment;
+import com.albertmiro.albums4u.ui.albumslist.AlbumsListFragment;
 
 class Navigation {
 

@@ -7,12 +7,15 @@ public class LookupResponse {
     //COMMON
 
     @SerializedName("wrapperType")
+    public
     String wrapperType;
 
     @SerializedName("artistName")
+    public
     String artistName;
 
     @SerializedName("artistId")
+    public
     int artistId;
 
     @SerializedName("amgArtistId")
@@ -38,9 +41,11 @@ public class LookupResponse {
     String collectionType;
 
     @SerializedName("collectionId")
+    public
     int collectionId;
 
     @SerializedName("collectionName")
+    public
     String collectionName;
 
     @SerializedName("collectionCensoredName")
@@ -56,6 +61,7 @@ public class LookupResponse {
     String artworkUrl60;
 
     @SerializedName("artworkUrl100")
+    public
     String artworkUrl100;
 
     @SerializedName("collectionPrice")
@@ -65,6 +71,7 @@ public class LookupResponse {
     String collectionExplicitness;
 
     @SerializedName("trackCount")
+    public
     int trackCount;
 
     @SerializedName("copyright")
@@ -85,21 +92,26 @@ public class LookupResponse {
     String kind;
 
     @SerializedName("trackId")
+    public
     int trackId;
 
     @SerializedName("trackName")
+    public
     String trackName;
 
     @SerializedName("trackPrice")
     double trackPrice;
 
     @SerializedName("trackNumber")
+    public
     int trackNumber;
 
     @SerializedName("trackTimeMillis")
+    public
     long trackTimeMillis;
 
     @SerializedName("previewUrl")
+    public
     String previewUrl;
 
     @SerializedName("isStreamable")

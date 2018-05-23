@@ -1,4 +1,4 @@
-package com.albertmiro.albums4u.viewmodel;
+package com.albertmiro.albums4u.ui.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -6,8 +6,8 @@ import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
 import com.albertmiro.albums4u.repository.LookupRepository;
-import com.albertmiro.albums4u.viewmodel.data.Album;
-import com.albertmiro.albums4u.viewmodel.data.ArtistAndAlbums;
+import com.albertmiro.albums4u.domain.Album;
+import com.albertmiro.albums4u.domain.ArtistAndAlbums;
 
 import java.net.UnknownHostException;
 

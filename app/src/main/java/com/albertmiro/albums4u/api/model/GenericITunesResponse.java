@@ -9,5 +9,6 @@ public class GenericITunesResponse {
     int resultCount;
 
     @SerializedName("results")
+    public
     List<LookupResponse> results;
 }

@@ -4,8 +4,8 @@ package com.albertmiro.albums4u.di;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.albertmiro.albums4u.viewmodel.AppViewModelFactory;
-import com.albertmiro.albums4u.viewmodel.LookupViewModel;
+import com.albertmiro.albums4u.ui.viewmodel.AppViewModelFactory;
+import com.albertmiro.albums4u.ui.viewmodel.LookupViewModel;
 
 import dagger.Binds;
 import dagger.Module;

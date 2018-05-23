@@ -1,7 +1,7 @@
 package com.albertmiro.albums4u.repository;
 
-import com.albertmiro.albums4u.viewmodel.data.ArtistAndAlbums;
-import com.albertmiro.albums4u.viewmodel.data.Track;
+import com.albertmiro.albums4u.domain.ArtistAndAlbums;
+import com.albertmiro.albums4u.domain.Track;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,9 @@
 package com.albertmiro.albums4u.repository;
 
-import com.albertmiro.albums4u.api.model.GenericITunesResponseMapper;
+import com.albertmiro.albums4u.api.mapper.GenericITunesResponseMapper;
+import com.albertmiro.albums4u.api.mapper.LookupResponseMapper;
 import com.albertmiro.albums4u.utils.AppUtils;
-import com.albertmiro.albums4u.viewmodel.data.ArtistAndAlbums;
+import com.albertmiro.albums4u.domain.ArtistAndAlbums;
 import com.albertmiro.albums4u.api.ITunesService;
 
 import javax.inject.Inject;
@@ -13,12 +14,14 @@ import io.reactivex.Observable;
 @Singleton
 public class LookupRepository {
 
-    private ITunesService iTunesService;
+    private final ITunesService iTunesService;
+    private final LookupResponseMapper lookupResponseMapper;
 
     @Inject
-    LookupRepository(ITunesService iTunesService)
+    LookupRepository(ITunesService iTunesService, LookupResponseMapper lookupResponseMapper)
     {
         this.iTunesService = iTunesService;
+        this.lookupResponseMapper = lookupResponseMapper;
     }
 
     private LookupCache artistAndAlbumsCache = new LookupCache();

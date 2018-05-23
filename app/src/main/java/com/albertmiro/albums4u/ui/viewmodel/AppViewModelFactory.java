@@ -1,4 +1,4 @@
-package com.albertmiro.albums4u.viewmodel;
+package com.albertmiro.albums4u.ui.viewmodel;
 
 
 import android.arch.lifecycle.ViewModel;

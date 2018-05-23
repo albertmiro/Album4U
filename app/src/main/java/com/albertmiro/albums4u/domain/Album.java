@@ -1,6 +1,4 @@
-package com.albertmiro.albums4u.viewmodel.data;
-
-import com.albertmiro.albums4u.utils.AppUtils;
+package com.albertmiro.albums4u.domain;
 
 import java.util.ArrayList;
 
@@ -13,7 +11,7 @@ public class Album extends CommonLookupData {
     private ArrayList<Track> tracks = new ArrayList<>();
 
     public Album(int id, String name, String thumbnailUrl, int trackCount,
-                 int artistId, String artistName, AppUtils.WRAPPER_TYPES wrapperType) {
+                 int artistId, String artistName, WrapperTypes.WRAPPER_TYPES wrapperType) {
         this.id = id;
         this.name = name;
         this.thumbnailUrl = thumbnailUrl;

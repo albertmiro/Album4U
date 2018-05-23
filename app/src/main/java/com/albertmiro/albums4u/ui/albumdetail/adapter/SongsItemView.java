@@ -1,4 +1,4 @@
-package com.albertmiro.albums4u.ui.albums.detail.adapter;
+package com.albertmiro.albums4u.ui.albumdetail.adapter;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.albertmiro.albums4u.R;
 import com.albertmiro.albums4u.utils.AppUtils;
-import com.albertmiro.albums4u.viewmodel.data.Track;
+import com.albertmiro.albums4u.domain.Track;
 
 public class SongsItemView extends RelativeLayout {
 

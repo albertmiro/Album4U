@@ -1,4 +1,4 @@
-package com.albertmiro.albums4u.ui.albums.adapter;
+package com.albertmiro.albums4u.ui.albumslist.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.albertmiro.albums4u.R;
-import com.albertmiro.albums4u.viewmodel.data.Album;
+import com.albertmiro.albums4u.domain.Album;
 import com.squareup.picasso.Picasso;
 
 public class AlbumsItemView extends RelativeLayout {

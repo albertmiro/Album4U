@@ -1,6 +1,5 @@
-package com.albertmiro.albums4u.ui.albums.detail;
+package com.albertmiro.albums4u.ui.albumdetail;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,12 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.albertmiro.albums4u.R;
-import com.albertmiro.albums4u.ui.albums.detail.adapter.SongsAdapter;
+import com.albertmiro.albums4u.ui.albumdetail.adapter.SongsAdapter;
 import com.albertmiro.albums4u.ui.common.BaseFragment;
-import com.albertmiro.albums4u.viewmodel.AppViewModelFactory;
-import com.albertmiro.albums4u.viewmodel.LookupViewModel;
-import com.albertmiro.albums4u.viewmodel.data.Album;
-import com.albertmiro.albums4u.viewmodel.data.Track;
+import com.albertmiro.albums4u.ui.viewmodel.AppViewModelFactory;
+import com.albertmiro.albums4u.ui.viewmodel.LookupViewModel;
+import com.albertmiro.albums4u.domain.Album;
+import com.albertmiro.albums4u.domain.Track;
 import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
@@ -92,42 +91,30 @@ public class AlbumDetailFragment extends BaseFragment {
 
     private void initObservers() {
         albumsViewModel.isDataLoading()
-                .observe(this, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(@Nullable Boolean hasChanged) {
-                        if (hasChanged != null) {
-                            if (hasChanged) {
-                                progressBarContainer.setVisibility(View.VISIBLE);
-                            } else {
-                                progressBarContainer.setVisibility(View.GONE);
-                            }
+                .observe(this, hasChanged -> {
+                    if (hasChanged != null) {
+                        if (hasChanged) {
+                            progressBarContainer.setVisibility(View.VISIBLE);
+                        } else {
+                            progressBarContainer.setVisibility(View.GONE);
                         }
                     }
                 });
 
-        albumsViewModel.getAlbum().observe(this, new Observer<Album>() {
-            @Override
-            public void onChanged(@Nullable Album album) {
-                fillAlbumInfo(album);
-                showAlbumTracks(album != null ? album.getTracks() : Collections.<Track>emptyList());
+        albumsViewModel.getAlbum().observe(this, album -> {
+            fillAlbumInfo(album);
+            showAlbumTracks(album != null ? album.getTracks() : Collections.emptyList());
+        });
+
+        albumsViewModel.isNetworkError().observe(this, hasChanged -> {
+            if (hasChanged != null && hasChanged) {
+                mainActivity.showMessage(getString(R.string.lost_connection));
             }
         });
 
-        albumsViewModel.isNetworkError().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean hasChanged) {
-                if (hasChanged != null && hasChanged) {
-                    mainActivity.showMessage(getString(R.string.lost_connection));
-                }
-            }
-        });
-
-        albumsViewModel.isUnknownError().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean hasChanged) {
-                if (hasChanged != null && hasChanged) {
-                    mainActivity.showMessage(getString(R.string.unexpected_error));
-                }
+        albumsViewModel.isUnknownError().observe(this, hasChanged -> {
+            if (hasChanged != null && hasChanged) {
+                mainActivity.showMessage(getString(R.string.unexpected_error));
             }
         });
     }

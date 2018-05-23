@@ -1,4 +1,4 @@
-package com.albertmiro.albums4u.ui.albums;
+package com.albertmiro.albums4u.ui.albumslist;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -13,11 +13,11 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.albertmiro.albums4u.R;
-import com.albertmiro.albums4u.ui.albums.adapter.AlbumsAdapter;
+import com.albertmiro.albums4u.ui.albumslist.adapter.AlbumsAdapter;
 import com.albertmiro.albums4u.ui.common.BaseFragment;
-import com.albertmiro.albums4u.viewmodel.AppViewModelFactory;
-import com.albertmiro.albums4u.viewmodel.LookupViewModel;
-import com.albertmiro.albums4u.viewmodel.data.Album;
+import com.albertmiro.albums4u.ui.viewmodel.AppViewModelFactory;
+import com.albertmiro.albums4u.ui.viewmodel.LookupViewModel;
+import com.albertmiro.albums4u.domain.Album;
 
 import java.util.Collections;
 import java.util.List;

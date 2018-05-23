@@ -1,6 +1,4 @@
-package com.albertmiro.albums4u.viewmodel.data;
-
-import com.albertmiro.albums4u.utils.AppUtils;
+package com.albertmiro.albums4u.domain;
 
 public class Track extends CommonLookupData {
 
@@ -12,7 +10,7 @@ public class Track extends CommonLookupData {
     private final String trackName;
 
     public Track(int trackId, int trackNumber, String trackName, long trackTimeMillis, String previewUrl,
-                 int albumId, AppUtils.WRAPPER_TYPES wrapperType) {
+                 int albumId, WrapperTypes.WRAPPER_TYPES wrapperType) {
         this.trackId = trackId;
         this.trackNumber = trackNumber;
         this.trackName = trackName;

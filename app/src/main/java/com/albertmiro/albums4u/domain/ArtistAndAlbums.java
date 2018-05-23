@@ -1,4 +1,4 @@
-package com.albertmiro.albums4u.viewmodel.data;
+package com.albertmiro.albums4u.domain;
 
 import android.util.SparseArray;
 

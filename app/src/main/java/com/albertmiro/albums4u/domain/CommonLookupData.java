@@ -1,12 +1,10 @@
-package com.albertmiro.albums4u.viewmodel.data;
-
-import com.albertmiro.albums4u.utils.AppUtils;
+package com.albertmiro.albums4u.domain;
 
 public class CommonLookupData {
 
     int artistId;
     String artistName;
-    AppUtils.WRAPPER_TYPES wrapperType;
+    WrapperTypes.WRAPPER_TYPES wrapperType;
 
     public int getArtistId() {
         return artistId;
@@ -24,11 +22,11 @@ public class CommonLookupData {
         this.artistName = artistName;
     }
 
-    public AppUtils.WRAPPER_TYPES getWrapperType() {
+    public WrapperTypes.WRAPPER_TYPES getWrapperType() {
         return wrapperType;
     }
 
-    public void setWrapperType(AppUtils.WRAPPER_TYPES wrapperType) {
+    public void setWrapperType(WrapperTypes.WRAPPER_TYPES wrapperType) {
         this.wrapperType = wrapperType;
     }
 }
