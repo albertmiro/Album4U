@@ -6,9 +6,8 @@ import java.util.List;
 
 public class GenericITunesResponse {
     @SerializedName("resultCount")
-    int resultCount;
+    public int resultCount;
 
     @SerializedName("results")
-    public
-    List<LookupResponse> results;
+    public List<LookupResponse> results;
 }

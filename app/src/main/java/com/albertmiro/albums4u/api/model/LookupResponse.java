@@ -7,113 +7,101 @@ public class LookupResponse {
     //COMMON
 
     @SerializedName("wrapperType")
-    public
-    String wrapperType;
+    public String wrapperType;
 
     @SerializedName("artistName")
-    public
-    String artistName;
+    public String artistName;
 
     @SerializedName("artistId")
-    public
-    int artistId;
+    public int artistId;
 
     @SerializedName("amgArtistId")
-    int amgArtistId;
+    public int amgArtistId;
 
     @SerializedName("primaryGenreName")
-    String primaryGenreName;
+    public String primaryGenreName;
 
     //ARTIST
 
     @SerializedName("primaryGenreId")
-    int primaryGenreId;
+    public int primaryGenreId;
 
     @SerializedName("artistLinkUrl")
-    String artistLinkUrl;
+    public String artistLinkUrl;
 
     @SerializedName("artistType")
-    String artistType;
+    public String artistType;
 
     //COLLECTION
 
     @SerializedName("collectionType")
-    String collectionType;
+    public String collectionType;
 
     @SerializedName("collectionId")
-    public
-    int collectionId;
+    public int collectionId;
 
     @SerializedName("collectionName")
-    public
-    String collectionName;
+    public String collectionName;
 
     @SerializedName("collectionCensoredName")
-    String collectionCensoredName;
+    public String collectionCensoredName;
 
     @SerializedName("artistViewUrl")
-    String artistViewUrl;
+    public String artistViewUrl;
 
     @SerializedName("collectionViewUrl")
-    String collectionViewUrl;
+    public String collectionViewUrl;
 
     @SerializedName("artworkUrl60")
-    String artworkUrl60;
+    public String artworkUrl60;
 
     @SerializedName("artworkUrl100")
-    public
-    String artworkUrl100;
+    public String artworkUrl100;
 
     @SerializedName("collectionPrice")
-    double collectionPrice;
+    public double collectionPrice;
 
     @SerializedName("collectionExplicitness")
-    String collectionExplicitness;
+    public String collectionExplicitness;
 
     @SerializedName("trackCount")
-    public
-    int trackCount;
+    public int trackCount;
 
     @SerializedName("copyright")
-    String copyright;
+    public String copyright;
 
     @SerializedName("country")
-    String country;
+    public String country;
 
     @SerializedName("currency")
-    String currency;
+    public String currency;
 
     @SerializedName("releaseDate")
-    String releaseDate;
+    public String releaseDate;
 
     //TRACK
 
     @SerializedName("kind")
-    String kind;
+    public String kind;
 
     @SerializedName("trackId")
-    public
-    int trackId;
+    public int trackId;
 
     @SerializedName("trackName")
-    public
-    String trackName;
+    public String trackName;
 
     @SerializedName("trackPrice")
-    double trackPrice;
+    public double trackPrice;
 
     @SerializedName("trackNumber")
-    public
-    int trackNumber;
+    public int trackNumber;
 
     @SerializedName("trackTimeMillis")
-    public
-    long trackTimeMillis;
+    public long trackTimeMillis;
 
     @SerializedName("previewUrl")
-    public
-    String previewUrl;
+    public String previewUrl;
 
     @SerializedName("isStreamable")
-    boolean isStreamable;
+    public boolean isStreamable;
 }
