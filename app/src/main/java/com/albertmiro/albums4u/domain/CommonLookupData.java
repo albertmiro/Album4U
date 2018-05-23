@@ -4,7 +4,7 @@ public class CommonLookupData {
 
     int artistId;
     String artistName;
-    WrapperTypes.WRAPPER_TYPES wrapperType;
+    WrapperType wrapperType;
 
     public int getArtistId() {
         return artistId;
@@ -22,11 +22,11 @@ public class CommonLookupData {
         this.artistName = artistName;
     }
 
-    public WrapperTypes.WRAPPER_TYPES getWrapperType() {
+    public WrapperType getWrapperType() {
         return wrapperType;
     }
 
-    public void setWrapperType(WrapperTypes.WRAPPER_TYPES wrapperType) {
+    public void setWrapperType(WrapperType wrapperType) {
         this.wrapperType = wrapperType;
     }
 }

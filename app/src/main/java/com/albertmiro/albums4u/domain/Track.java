@@ -10,7 +10,7 @@ public class Track extends CommonLookupData {
     private final String trackName;
 
     public Track(int trackId, int trackNumber, String trackName, long trackTimeMillis, String previewUrl,
-                 int albumId, WrapperTypes.WRAPPER_TYPES wrapperType) {
+                 int albumId, WrapperType wrapperType) {
         this.trackId = trackId;
         this.trackNumber = trackNumber;
         this.trackName = trackName;

@@ -11,7 +11,7 @@ public class Album extends CommonLookupData {
     private ArrayList<Track> tracks = new ArrayList<>();
 
     public Album(int id, String name, String thumbnailUrl, int trackCount,
-                 int artistId, String artistName, WrapperTypes.WRAPPER_TYPES wrapperType) {
+                 int artistId, String artistName, WrapperType wrapperType) {
         this.id = id;
         this.name = name;
         this.thumbnailUrl = thumbnailUrl;

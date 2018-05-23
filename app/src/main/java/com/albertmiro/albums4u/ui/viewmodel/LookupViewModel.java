@@ -5,22 +5,22 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
-import com.albertmiro.albums4u.repository.LookupRepository;
 import com.albertmiro.albums4u.domain.Album;
 import com.albertmiro.albums4u.domain.ArtistAndAlbums;
+import com.albertmiro.albums4u.repository.LookupRepositoryImpl;
 
 import java.net.UnknownHostException;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class LookupViewModel extends ViewModel {
 
-    private LookupRepository lookupRepository;
+    private LookupRepositoryImpl lookupRepository;
 
     private MutableLiveData<Boolean> isDataLoading;
     private MutableLiveData<ArtistAndAlbums> artistAndAlbums;
@@ -29,8 +29,7 @@ public class LookupViewModel extends ViewModel {
     private MutableLiveData<Boolean> isUnknownError;
 
     @Inject
-    LookupViewModel(@NonNull LookupRepository lookupRepository) {
-
+    LookupViewModel(@NonNull LookupRepositoryImpl lookupRepository) {
         this.lookupRepository = lookupRepository;
 
         this.isDataLoading = new MutableLiveData<>();
@@ -38,7 +37,6 @@ public class LookupViewModel extends ViewModel {
         this.currentAlbum = new MutableLiveData<>();
         this.isNetworkError = new MutableLiveData<>();
         this.isUnknownError = new MutableLiveData<>();
-
     }
 
     public LiveData<Boolean> isDataLoading() {
@@ -62,20 +60,19 @@ public class LookupViewModel extends ViewModel {
     }
 
     public void loadAlbumsForArtist() {
-        isDataLoading.postValue(true);
-
         lookupRepository.getJackJohnsonAlbums()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ArtistAndAlbums>() {
+                .doOnSubscribe(disposable -> isDataLoading.setValue(true))
+                .subscribe(new SingleObserver<ArtistAndAlbums>() {
 
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
 
                     @Override
-                    public void onNext(ArtistAndAlbums albumsAndArtist) {
-                        artistAndAlbums.postValue(albumsAndArtist);
+                    public void onSuccess(ArtistAndAlbums albumsAndArtists) {
+                        artistAndAlbums.postValue(albumsAndArtists);
                         isDataLoading.postValue(false);
                         isNetworkError.postValue(false);
                         isUnknownError.postValue(false);
@@ -83,7 +80,6 @@ public class LookupViewModel extends ViewModel {
 
                     @Override
                     public void onError(Throwable t) {
-                        t.printStackTrace();
                         isDataLoading.postValue(false);
                         if (t instanceof UnknownHostException) {
                             isNetworkError.postValue(true);
@@ -91,30 +87,25 @@ public class LookupViewModel extends ViewModel {
                             isUnknownError.postValue(true);
                         }
                     }
-
-                    @Override
-                    public void onComplete() {
-                    }
-
                 });
     }
 
     public void loadAlbumSongs(final int albumId) {
-        isDataLoading.postValue(true);
         currentAlbum.postValue(null);
 
         lookupRepository.getAlbumSongs(albumId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ArtistAndAlbums>() {
+                .doOnSubscribe(disposable -> isDataLoading.setValue(true))
+                .subscribe(new SingleObserver<ArtistAndAlbums>() {
 
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
 
                     @Override
-                    public void onNext(ArtistAndAlbums albumsAndArtist) {
-                        Album album = albumsAndArtist.getAlbum(albumId);
+                    public void onSuccess(ArtistAndAlbums artistAndAlbums) {
+                        Album album = artistAndAlbums.getAlbum(albumId);
                         isDataLoading.postValue(false);
                         currentAlbum.postValue(album);
                         isNetworkError.postValue(false);
@@ -123,7 +114,6 @@ public class LookupViewModel extends ViewModel {
 
                     @Override
                     public void onError(Throwable t) {
-                        t.printStackTrace();
                         isDataLoading.postValue(false);
                         if (t instanceof UnknownHostException) {
                             isNetworkError.postValue(true);
@@ -131,11 +121,6 @@ public class LookupViewModel extends ViewModel {
                             isUnknownError.postValue(true);
                         }
                     }
-
-                    @Override
-                    public void onComplete() {
-                    }
-
                 });
     }
 
