@@ -13,18 +13,18 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.albertmiro.albums4u.R;
+import com.albertmiro.albums4u.domain.Album;
 import com.albertmiro.albums4u.ui.albumslist.adapter.AlbumsAdapter;
 import com.albertmiro.albums4u.ui.common.BaseFragment;
 import com.albertmiro.albums4u.ui.viewmodel.AppViewModelFactory;
 import com.albertmiro.albums4u.ui.viewmodel.LookupViewModel;
-import com.albertmiro.albums4u.domain.Album;
 
 import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class AlbumsListFragment extends BaseFragment implements AlbumListListener, AlbumsListContract {
+public class AlbumsListFragment extends BaseFragment implements AlbumListListener {
 
     private static final int GRID_SPAN_COUNT = 2;
 
@@ -44,7 +44,6 @@ public class AlbumsListFragment extends BaseFragment implements AlbumListListene
 
         albumsViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(LookupViewModel.class);
-
 
         initViews();
 
@@ -111,7 +110,6 @@ public class AlbumsListFragment extends BaseFragment implements AlbumListListene
         });
     }
 
-    @Override
     public void showOrHideProgressBar(boolean showProgress) {
         if (showProgress) {
             progressBarContainer.setVisibility(View.VISIBLE);
@@ -120,19 +118,16 @@ public class AlbumsListFragment extends BaseFragment implements AlbumListListene
         }
     }
 
-    @Override
     public void showUnknownError() {
         showMessage(getString(R.string.unexpected_error));
         hideRefreshingIcon();
     }
 
-    @Override
     public void showNetworkError() {
         showMessage(getString(R.string.lost_connection));
         hideRefreshingIcon();
     }
 
-    @Override
     public void showAlbums(List<Album> albums) {
         if (swipeToRefresh.isRefreshing()) {
             albumsAdapter.clearItems();
@@ -146,14 +141,12 @@ public class AlbumsListFragment extends BaseFragment implements AlbumListListene
         }
     }
 
-    @Override
     public void hideRefreshingIcon() {
         if (swipeToRefresh.isRefreshing()) {
             swipeToRefresh.setRefreshing(false);
         }
     }
 
-    @Override
     public void showMessage(String message) {
         mainActivity.showMessage(message);
     }
