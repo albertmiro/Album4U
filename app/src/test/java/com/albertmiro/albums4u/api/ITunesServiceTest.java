@@ -17,20 +17,12 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.albertmiro.albums4u.TestUtils.*;
+
 public class ITunesServiceTest {
 
     private ITunesService iTunesService;
     private MockWebServer mockWebServer;
-
-    private static final String SONG_ENTITY = "song";
-    private static final String ALBUM_ENTITY = "album";
-
-    private static final String COLLECTION_WRAPPER_TYPE = "collection";
-    private static final String TRACK_WRAPPER_TYPE = "track";
-
-    private static final int JACK_JOHNSON_ID = 909253;
-    private static final int ALBUM_ID_WITH_SONGS = 659234734;
-    private static final int ALBUM_ID_NO_SONGS = 109181599;
 
     @Before
     public void createService() {

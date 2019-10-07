@@ -7,4 +7,8 @@ public class Artist extends CommonLookupData {
         this.artistName = artistName;
         this.wrapperType = wrapperType;
     }
+
+    public Artist() {
+
+    }
 }
