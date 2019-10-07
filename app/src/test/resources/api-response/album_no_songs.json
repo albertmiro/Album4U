@@ -1,0 +1,5 @@
+{
+ "resultCount":1,
+ "results": [
+{"wrapperType":"collection", "collectionType":"Album", "artistId":909253, "collectionId":109181599, "amgArtistId":468749, "artistName":"Jack Johnson and Friends", "collectionName":"A Weekend At the Greek (Live)", "collectionCensoredName":"A Weekend At the Greek (Live)", "artistViewUrl":"https://itunes.apple.com/us/artist/jack-johnson/909253?uo=4", "collectionViewUrl":"https://itunes.apple.com/us/album/a-weekend-at-the-greek-live/109181599?uo=4", "artworkUrl60":"https://is4-ssl.mzstatic.com/image/thumb/Music/v4/6c/54/74/6c547428-cf1c-e143-a6d5-a5e815c0c5f7/source/60x60bb.jpg", "artworkUrl100":"https://is4-ssl.mzstatic.com/image/thumb/Music/v4/6c/54/74/6c547428-cf1c-e143-a6d5-a5e815c0c5f7/source/100x100bb.jpg", "collectionPrice":-1.00, "collectionExplicitness":"notExplicit", "trackCount":22, "copyright":"℗ 2005 Brushfire Records Inc UNDER EXCLUSIVE LICENSE TO UNIVERSAL INTERNATIONAL MUSIC B.V., A UNIVERSAL MUSIC GROUP COMPANY", "country":"USA", "currency":"USD", "releaseDate":"2005-01-01T08:00:00Z", "primaryGenreName":"Rock"}]
+}

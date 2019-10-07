@@ -16,12 +16,13 @@ public class LookupRepositoryImpl implements LookupRepository {
 
     private final ITunesService iTunesService;
     private final LookupResponseMapper lookupResponseMapper;
+    private final GenericITunesResponseMapper genericITunesResponseMapper;
 
     @Inject
-    LookupRepositoryImpl(ITunesService iTunesService, LookupResponseMapper lookupResponseMapper)
-    {
+    LookupRepositoryImpl(ITunesService iTunesService, LookupResponseMapper lookupResponseMapper, GenericITunesResponseMapper genericITunesResponseMapper) {
         this.iTunesService = iTunesService;
         this.lookupResponseMapper = lookupResponseMapper;
+        this.genericITunesResponseMapper = genericITunesResponseMapper;
     }
 
     private LookupCache artistAndAlbumsCache = new LookupCache();
@@ -34,7 +35,8 @@ public class LookupRepositoryImpl implements LookupRepository {
 
         return iTunesService.getAlbumsByArtist(AppUtils.JACK_JOHNSON_ID, AppUtils.ALBUM_ENTITY)
                 .map(genericAlbumAndArtistResponse -> {
-                    ArtistAndAlbums artistAndAlbums = new GenericITunesResponseMapper().toAlbumsAndArtist(genericAlbumAndArtistResponse);
+                    ArtistAndAlbums artistAndAlbums = genericITunesResponseMapper
+                            .toAlbumsAndArtist(lookupResponseMapper, genericAlbumAndArtistResponse);
                     artistAndAlbumsCache.setArtistAndAlbums(artistAndAlbums);
                     return artistAndAlbums;
                 });
@@ -49,8 +51,9 @@ public class LookupRepositoryImpl implements LookupRepository {
 
         return iTunesService.getAlbumSongs(albumId, AppUtils.SONG_ENTITY)
                 .map(genericAlbumAndArtistResponse -> {
-                    ArtistAndAlbums artistAndAlbums = new GenericITunesResponseMapper().toAlbumsAndArtist(genericAlbumAndArtistResponse);
-                    artistAndAlbumsCache.updateAlbumWithTracks(albumId,artistAndAlbums.getAlbum(albumId).getTracks());
+                    ArtistAndAlbums artistAndAlbums = genericITunesResponseMapper
+                            .toAlbumsAndArtist(lookupResponseMapper, genericAlbumAndArtistResponse);
+                    artistAndAlbumsCache.updateAlbumWithTracks(albumId, artistAndAlbums.getAlbum(albumId).getTracks());
                     return artistAndAlbums;
                 });
     }
